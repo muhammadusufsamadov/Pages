@@ -1,0 +1,21 @@
+.Page2{
+    text-align: center;
+    position: relative;
+    top: 20px;
+    font-size: 20px;
+    font-family: monospace;
+    transition: 0.10s;
+    width: 100px;
+    margin: auto;
+    cursor: pointer;
+     
+}
+.Page2:hover{
+    text-align: center;
+    position: relative;
+    top: 20px;
+    font-size: 20px;
+    font-family: monospace;
+    border-bottom: 2px solid rgb(195, 0, 255);
+padding-bottom: 5px;
+}

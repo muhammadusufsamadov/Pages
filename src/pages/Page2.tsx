@@ -13,6 +13,9 @@ import imageLoko4 from "../assets/image copy 11.png"
 import imageLoko5 from "../assets/image copy 12.png"
 import imageLoko6 from "../assets/image copy 13.png"
 import imageFood10 from "../assets/image copy 14.png"
+import roudedWhite from "../assets/image copy 23.png"
+import imageOtziv from "../assets/image copy 24.png"
+import FoodWoman from "../assets/image copy 22.png"
 import Section2 from '../components/Section2'
 import Section3 from '../components/Section3'
 import SectionFoods from '../components/SectionFoods'
@@ -20,32 +23,11 @@ import ButtonGreen from '../components/ButtonGreen'
 import Section4 from '../components/Section4'
 import Section5 from '../components/Section5'
 import Section6 from '../components/Section6'
-const Home = () => {
+const Page2 = () => {
   return (
     <div style={{backgroundColor:"rgb(255, 246, 233)"}}>
       <Section1 LoremSection1="" textSection1="Доставка прогрессивного питания для гурманов" textButton1="Подобрать питание" textButtonBorder="Получить консультацию" />
-    <section>
-      <div className='lg:flex items-center justify-center gap-[100px]'>
-      <div>
-        <img src={imageHands} alt="" />
-      </div>
-        <div>
-          <h3 className='text-[33px] text-[550] mb-[30px]'>Еда, которая сделает тебя лучше!</h3>
-          <p className='lg:w-[550px] text-[19px]'>Мы помогаем создавать новое качество жизни для наших клиентов, чтоб каждый человек был счастливым, здоровым и не отвлекался на рутинные процессы.
-Для этого мы создали новый уникальный продукт на рынке доставки еды и приглашаем вас окунуться в гастрономический шик уже сегодня.</p>
-        </div>
-      </div>
-      <div className='lg:flex flex-row-reverse mt-[30px] items-center justify-center gap-[100px]'>
-      <div>
-        <img src={imageHands2} alt="" />
-      </div>
-        <div>
-          <h3 className='text-[33px] text-[550] mb-[30px]'>Изысканное меню высокой кухни</h3>
-          <p className='lg:w-[550px] text-[19px]'>В наших блюдах мы продумали каждую деталь, все ингредиенты тщательно подобраны и создают неповторимый вкус.
-Качественные продукты, деликатесы и суперфуды, которые помогают  поддерживать здоровье и обмен веществ. Мы используем крафтовые ингредиенты: с любовью выращиваем микрозелень, делаем соусы и масла, маринуем мясо, рыбу и морепродукты..</p>
-        </div>
-      </div>
-    </section>
+   
     <section className='mt-[60px]'>
       <Section2 textSection2="Подберите рацион для своих целей"/>
     </section>
@@ -90,7 +72,7 @@ const Home = () => {
 работоспособность и укреплять здоровье.</p>
             </div>
             <div>
-              <img className='w-[320px] h-[300px]' src={imageFood10} alt="" />
+              <img className='w-[320px] h-[300px]' src={FoodWoman} alt="" />
             </div>
         </div>
     </section>
@@ -98,10 +80,48 @@ const Home = () => {
       <Section5/>
     </section>
     <section>
+        <div>
+            <h1 className='text-[50px] font-[550] lg:ml-[40px] mt-[40px]'>Акции</h1>
+            <div className='lg:flex items-center justify-center gap-[80px] mt-[30px]'>
+
+            <div className='flex bg-[#EA9DA3] items-center lg:w-[550px] py-[20px] rounded-4xl gap-[20px] px-[30px]'>
+<div>
+    <p className='text-[white] font-[550] text-[23px] mb-[20px]'>Наименование акции</p>
+    <p className='text-[white] font-[550] text-[23px] mb-[27px]'>Краткое описание акции</p>
+    <button className='border-[1px] border-[white] py-[10px] px-[20px] rounded-2xl text-[white]'>Подробнее</button>
+</div>
+<div>
+    <img className='w-[220px]' src={roudedWhite} alt="" />
+</div>
+            </div>
+            <div className='flex bg-[#9898A0] items-center lg:w-[550px] py-[20px] rounded-4xl gap-[20px] px-[30px]'>
+<div>
+    <p className='text-[white] font-[550] text-[23px] mb-[20px]'>Наименование акции</p>
+    <p className='text-[white] font-[550] text-[23px] mb-[27px]'>Краткое описание акции</p>
+    <button className='border-[1px] border-[white] py-[10px] px-[20px] rounded-2xl text-[white]'>Подробнее</button>
+</div>
+<div>
+    <img className='w-[220px]' src={roudedWhite} alt="" />
+</div>
+            </div>
+            </div>
+        </div>
+    </section>
+    <section>
       <Section6/>
+    </section>
+
+    <section>
+        <h1 className='text-[45px] ml-[30px] font-[550] mt-[40px] mb-[50px]'>Отзывы</h1>
+        <div className='lg:flex gap-[30px] justify-center'>
+            <img className='w-[260px] flex m-auto mt-[20px]' src={imageOtziv} alt="" />
+            <img className='w-[260px] flex m-auto mt-[20px]' src={imageOtziv} alt="" />
+            <img className='w-[260px] flex m-auto mt-[20px]' src={imageOtziv} alt="" />
+            <img className='w-[260px] flex m-auto mt-[20px]' src={imageOtziv} alt="" />
+        </div>
     </section>
     </div>
   )
 }
 
-export default Home
+export default Page2
