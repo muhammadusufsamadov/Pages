@@ -6,26 +6,35 @@ export const useTodo = create((set, get) => ({
         {
             id:1,
             name:"Iso",
+            age:12,
+            email:"isojovin@gmail.com",
             status:false
         },
         {
             id:2,
             name:"Valid",
+            age:15,
+            email:"freisojovin@gmail.com",
             status:true
         },
+        {
+            id:3,
+            name:"Umar",
+            age:13,
+            email:"Umarisojovin@gmail.com",
+            status:false
+        },
     ],
-    count:1,
-    setCount: () => set((state: any) => ({count: state.count + 1})),
-    setCount2: () => set((state: any) => ({count: state.count - 1})),
-    setCount3: () => set((state: any) => ({count: state.count * 2})),
-    setCount4: () => set((state: any) => ({count: state.count / 2})),
-    setCount5: () => set((state: any) => ({count: state.count = 0})),
-  
+   
     deleteUser:(id) => {
         set((state) => ({data: state.data.filter((user) => user.id !== id)}))
     },
-   addNewUser:(name:string) => {
+   addNewUser:(name:string, age:number, email:string, status:boolean, id:number) => {
     set((state) => ({
-        data: [...state.data, {id: Date.now(), name}]
+        data: [...state.data, { name, age, email, status}]
+    }))},
+   editUser: (obj:any) => {
+    set((state) => ({
+      data: state.data.map((e) => (e.id === obj.id ? obj : e))
     }))
 }}))

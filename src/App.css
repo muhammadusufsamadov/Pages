@@ -19,3 +19,45 @@
     border-bottom: 2px solid rgb(195, 0, 255);
 padding-bottom: 5px;
 }
+.Active{
+    color: green;
+    background-color: rgba(0, 128, 0, 0.107);
+    width: 100px;
+    text-align: center;
+    margin: auto;
+    border-radius: 40px;
+    margin-top: 10px;
+}
+.Inactive{
+    color: red;
+    background-color: rgba(128, 0, 0, 0.107);
+    width: 100px;
+    text-align: center;
+    margin: auto;
+    border-radius: 40px;
+    margin-top: 10px;
+    
+}
+td{
+    padding: 10px;
+    border-bottom: 1px solid gray;
+
+}
+tr:hover{
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    background-color: aliceblue;
+    cursor: pointer;
+    box-shadow: 0px 0px 1px rgb(209, 211, 214);
+}
+table{
+    border-collapse: collapse;
+}
+th{
+    border-bottom: 1px solid rgb(212, 212, 212);
+padding: 10px;
+}
+tr{
+    border-left: 3px solid rgb(194, 194, 194);
+    border-right: 1px solid gray;
+}
