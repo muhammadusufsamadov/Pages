@@ -1,26 +1,39 @@
-import { create } from "zustand";
+import { create } from 'zustand';
+const api = "https://696e0194d7bacd2dd7155df5.mockapi.io/users"
+import axios from "axios"
+interface IUser {
+  id: number,
+  name:string,
+  avatar:string,
+  age:string,
+  status:boolean,
+  Location: string,
+}
+export let todoStore = create((set, get) => ({
+  data: [],
 
-export const toDolist = create((set, get) => ({
-  data: [
-    { id:1, name:"Muhammad", age:13, status:false, location:"Dushanbe"},
-    { id:2, name:"Ali", age:20, status:true, location:"Ayni"},
-    { id:3, name:"Ahmad", age:24, status:true, location:"Fayzobod"}
-  ],
-
-  deleteUser: (id:number) =>
-    set((state)=>({
-      data: state.data.filter(user => user.id !== id)
-    })),
-
-  addUser: (user:any) =>
-    set((state)=>({
-      data: [...state.data, { id: Date.now(), ...user }]
-    })),
-
-  editUser: (obj:any) =>
-    set((state)=>({
-      data: state.data.map(user =>
-        user.id === obj.id ? obj : user
-      )
-    }))
-}));
+  getData: async () => {
+    try {
+      let { data } = await axios.get(api)
+      set({ data: data })
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  deleteUser: async (id: IUser) => {
+  try {
+    await axios.delete(`${api}/${id}`)
+    get().getData()
+  } catch (error) {
+    console.error(error);
+  }
+  },
+  addUser: async (obj: IUser) => {
+  try {
+    await axios.post(api, obj)
+    get().getData()
+  } catch (error) {
+    console.error(error);
+  }
+  }
+}))
