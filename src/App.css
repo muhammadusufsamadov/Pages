@@ -1,0 +1,20 @@
+.Active{
+    color: green;
+    background-color: rgba(0, 128, 0, 0.08);
+    border-radius: 70px;
+    width: 90px;
+    text-align: center;
+}
+.Inactive{
+    color: rgb(255, 3, 3);
+    background-color: rgba(255, 3, 3, 0.08);
+    border-radius: 70px;
+    width: 90px;
+    text-align: center;
+}
+.sers{
+    border-bottom: 5px solid rebeccapurple;
+}
+.ist{
+    border-top: 4px solid rebeccapurple;
+}
