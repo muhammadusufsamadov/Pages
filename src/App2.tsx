@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { toDoStore } from './Zustand/ZustandLogik'
 import {Button, Checkbox, Input, Modal} from "antd"
 import {useFormik} from "formik"
@@ -34,22 +34,8 @@ const App2 = () => {
   const handleCancelAdd = () => {
     setIsModalOpenAdd(false);
   };
-  //editModal;
-   const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
 
-  const showModalEdit = () => {
-    setIsModalOpenEdit(true);
-  };
-
-  const handleOkEdit = () => {
-    setIsModalOpenEdit(false);
-  };
-
-  const handleCancelEdit = () => {
-    setIsModalOpenEdit(false);
-  };
-
-  let {handleSubmit, handleChange, setFieldValue, resetForm, values} = useFormik({
+  let {handleSubmit, handleChange, resetForm, values} = useFormik({
     initialValues:{
       name:"",
       age:"",

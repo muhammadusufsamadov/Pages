@@ -1,4 +1,3 @@
-import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import Info from './Info'
 import App2 from './App2'
