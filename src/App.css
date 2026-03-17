@@ -1,20 +1,37 @@
-.Active{
-    color: green;
-    background-color: rgba(0, 128, 0, 0.08);
-    border-radius: 70px;
-    width: 90px;
-    text-align: center;
+.Active {
+  color: green;
+  background-color: rgba(0, 128, 0, 0.08);
+  border-radius: 70px;
+  width: 90px;
+  text-align: center;
 }
-.Inactive{
-    color: rgb(255, 3, 3);
-    background-color: rgba(255, 3, 3, 0.08);
-    border-radius: 70px;
-    width: 90px;
-    text-align: center;
+.Inactive {
+  color: rgb(255, 3, 3);
+  background-color: rgba(255, 3, 3, 0.08);
+  border-radius: 70px;
+  width: 90px;
+  text-align: center;
 }
-.sers{
-    border-bottom: 5px solid rebeccapurple;
+.sers {
+  border-bottom: 5px solid rebeccapurple;
 }
-.ist{
-    border-top: 4px solid rebeccapurple;
+.ist {
+  border-top: 4px solid rebeccapurple;
+}
+.body {
+  width: 100%;
+  padding: 60px 10px;
+  background-color: rgb(238, 241, 243);
+}
+.div {
+  width: 90%;
+  height: 86%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 23px;
+  background-color: rgb(238, 241, 243);
+  border: 1px solid lightgray;
+  flex-direction: column;
 }
