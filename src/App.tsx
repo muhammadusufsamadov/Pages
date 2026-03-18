@@ -1,35 +1,24 @@
-import React from "react";
-import { DeleteData, loadableAtom } from "./atom/todo";
-import { useAtom } from "jotai";
-import {Button} from "antd"
-import "./App.css"
+import React from 'react'
+import {BrowserRouter, Route, Routes} from "react-router"
+import Info from './Pages/Info'
+import Jotai from './Pages/Jotai'
+import Redux from './Pages/Redux'
+import Zustand from './Pages/Zustand'
+import Layout from './Pages/Layout'
 const App = () => {
-  const [{ data, state, error }] = useAtom(loadableAtom);
-  let [,deleteUser] = useAtom(DeleteData)
-  if(state == "loading"){
-    return <h1>Loading....</h1>
-  }
   return (
-    state == "hasData" && (
-      <div className="body">
-      <div className="flex w-[90%] flex-wrap m-auto justify-center gap-[20px]">
-        {data.map((user) => {
-          return (
-            <div key={user.id} className="w-[350px] bg-[white] flex justify-center items-center shadow-lg border-[1px] border-[lightgray] h-[320px] rounded-4xl">
-              <div className="div">
-                <img className="w-[100%] h-[160px]" style={{borderTopRightRadius:"23px", borderTopLeftRadius:"23px", position:"relative", bottom:"5px"}} src={user.avatar} alt="" />
-              <h1>{user.name}</h1>
-              <h1>{user.age}</h1>
-              <h1>{user.location}</h1>
-              <Button color="danger" variant="solid" onClick={() => deleteUser(user.id)}>Delete</Button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-        </div>
-    )
-  );
-};
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Layout/>}>
+    <Route index element={<Zustand/>}/>
+    <Route path='/Info' element={<Info/>}/>
+    <Route path='/Jotai' element={<Jotai/>}/>
+    <Route path='/Redux' element={<Redux/>}/>
+    <Route path='/Zustand' element={<Zustand/>}/>
+      </Route>
+    </Routes>
+    </BrowserRouter>
+  )
+}
 
-export default App;
+export default App
