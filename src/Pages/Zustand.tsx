@@ -24,7 +24,7 @@ let {data}:any = toDolist()
 // })
   return (
     <div>
-      {data.map((user) => {
+      {data.map((user:IUser) => {
         return <div>
           <h1>{user.name}</h1>
         </div>
