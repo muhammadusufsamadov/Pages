@@ -4,6 +4,7 @@
   border-radius: 70px;
   width: 90px;
   text-align: center;
+  padding: 3px 20px;
 }
 .Inactive {
   color: rgb(255, 3, 3);
@@ -11,6 +12,7 @@
   border-radius: 70px;
   width: 90px;
   text-align: center;
+  padding: 3px 20px;
 }
 .sers {
   border-bottom: 5px solid rebeccapurple;
@@ -46,4 +48,9 @@
   font-size: 20px;
   font-weight: 560;
   align-items: center;
+}
+.select{
+  border: 1px solid lightgray;
+  padding: 5px 10px;
+  border-radius: 6px;
 }
