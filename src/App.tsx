@@ -1,110 +1,156 @@
-import { useEffect, useState } from "react"
-import {todoList} from "./store/todo"
-import {Button, Checkbox, Input, Modal} from "antd"
-import './App.css' 
-export interface IUser{
-    id: number,
-    isCompleted: boolean,
-    images:{
-      imageName: string,
-    }[],
-    name:string,
-    description: string
+import { useEffect, useState } from "react";
+import { todoList } from "./store/todo";
+import { Button, Checkbox, Input, Modal } from "antd";
+import { useForm } from "react-hook-form";
+import "./App.css";
+
+export interface IUser {
+  id: number;
+  isCompleted: boolean;
+  images: {
+    imageName: string;
+  }[];
+  name: string;
+  description: string;
 }
-const urlImage = "http://37.27.29.18:8001/images"
+
+const urlImage = "http://37.27.29.18:8001/images";
+
 const App = () => {
-  let {todos, getUsers, deleteUser, searchName}:any = todoList()
+  const { todos, getUsers, deleteUser, searchName, editUser, addNewUser } =
+    todoList();
+
   useEffect(() => {
-    getUsers()
-  }, [])
+    getUsers();
+  }, []);
 
-  //addModal;
+  const { register, reset, handleSubmit, setValue } = useForm();
+
   const [isModalOpenAdd, setIsModalOpenAdd] = useState(false);
-
-  const showModalAdd = () => {
-    setIsModalOpenAdd(true);
-  };
-
-  const handleOkAdd = () => {
-    setIsModalOpenAdd(false);
-  };
-
-  const handleCancelAdd = () => {
-    setIsModalOpenAdd(false);
-  };
-  //EditModal;
   const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
+  const [idx, setIdx] = useState<number | null>(null);
 
-  const showModalEdit = () => {
+  const Submit = async (value: any) => {
+    const userData = {
+      name: value.name,
+      description: value.description,
+      isCompleted: false,
+      images: [],
+    };
+
+    if (idx) {
+      await editUser(idx, userData);
+      setIdx(null);
+      setIsModalOpenEdit(false);
+    } else {
+      await addNewUser(userData);
+      setIsModalOpenAdd(false);
+    }
+
+    reset();
+  };
+
+  const handleEdit = (user: IUser) => {
+    setValue("name", user.name);
+    setValue("description", user.description);
+    setIdx(user.id);
     setIsModalOpenEdit(true);
-  };
-
-  const handleOkEdit = () => {
-    setIsModalOpenEdit(false);
-  };
-
-  const handleCancelEdit = () => {
-    setIsModalOpenEdit(false);
   };
 
   return (
     <>
-    <div className="flex justify-between px-[135px] mt-[20px]">
-<Input onChange={(e) => searchName(e.target.value)} style={{width:"300px",padding:"6px" }} placeholder="Search by Name...                                      ✍"/>
-    <div className="flex items-center gap-[20px]">
-      <select name="" id="" className="border-[1px] border-[lightgray] px-[10px] py-[6px] rounded-lg " >
-        <option value="">All</option>
-        <option value="active">Active</option>
-        <option value="inactive">Inactive</option>
-      </select>
-      <Button type="primary" style={{height:"36px", fontWeight:"550"}} onClick={showModalAdd}>+ Add New</Button>
-    </div>
-    </div>
-      <div className="flex flex-wrap m-auto justify-center w-[80%] mt-[30px] gap-[30px]">
-        {todos.map((user:IUser) => {
-          return <div key={user.id} className="border-[1px] border-[lightgray] shadow-lg rounded-3xl w-[320px] px-[20px] py-[20px]">
-        <div>
-          {user.images.map((img) => {
-            return <div>
-              <img className="w-[100%] h-[180px] " src={`${urlImage}/${img.imageName}`} alt="" />
-            </div>
-          })}
-        </div>
-        <div className="mt-[20px] ">
-          <h1 className="flex justify-between"><b>Name : </b>{user.name}</h1>
-          <h1 className="flex justify-between mt-[10px]"><b>Description</b>{user.description.slice(0,16) + "..."}</h1>
-       <h1 className="flex items-center justify-between mt-[10px]">
-        <b>Status : </b>
-        {user.isCompleted && (
-          <p className="Active">Active</p>
-        )}
-        {!user.isCompleted && (
-          <p className="Inactive">Inactive</p>
-        )}
-        </h1>
-        </div>
-        <div className="flex justify-center gap-[4px] mt-[20px]">
-          <b>Actions : </b>
-        <Button color="orange" variant="filled">Info</Button>
-        <Button type="primary">Edit</Button>
-        <Button color="danger" variant="solid" onClick={() => deleteUser(user.id)}>Delete</Button>
-        <Checkbox/>
-        </div>
-          </div>
-        })}
+      <div className="flex justify-between px-[135px] mt-[20px]">
+        <Input
+          onChange={(e) => searchName(e.target.value)}
+          style={{ width: "300px" }}
+          placeholder="Search..."
+        />
+
+        <Button type="primary" onClick={() => setIsModalOpenAdd(true)}>
+          + Add New
+        </Button>
       </div>
+
+      <div className="flex flex-wrap justify-center m-auto gap-[20px] w-[85%] mt-[30px]">
+        {todos.map((user: IUser) => (
+          <div
+            key={user.id}
+            className="border-[1px] border-[lightgray] shadow rounded-xl w-[300px] p-[15px]"
+          >
+            {user.images?.map((img, i) => (
+              <img
+                key={i}
+                src={`${urlImage}/${img.imageName}`}
+                className="w-full h-[150px]"
+              />
+            ))}
+
+            <h3>{user.name}</h3>
+            <p>{user.description}</p>
+
+            <p>
+              Status:{" "}
+              {user.isCompleted ? (
+                <span style={{ color: "green" }}>Active</span>
+              ) : (
+                <span style={{ color: "red" }}>Inactive</span>
+              )}
+            </p>
+
+            <div className="flex gap-[5px] mt-[10px]">
+              <Button onClick={() => handleEdit(user)}>Edit</Button>
+
+              <Button danger onClick={() => deleteUser(user.id)}>
+                Delete
+              </Button>
+
+              <Checkbox checked={user.isCompleted} />
+            </div>
+          </div>
+        ))}
+      </div>
+
       <Modal
-        title="Basic Modal"
-        closable={{ 'aria-label': 'Custom Close Button' }}
+        title="Add User"
         open={isModalOpenAdd}
-        onOk={handleOkAdd}
-        onCancel={handleCancelAdd}
+        onCancel={() => setIsModalOpenAdd(false)}
         footer={null}
       >
-       <input type="text" name="" id="" />
+        <form onSubmit={handleSubmit(Submit)}>
+          <input
+          id="inputsModal"
+            placeholder="Name"
+            {...register("name", { required: true })}
+          />
+          <input
+          id="inputsModal"
+            placeholder="Description"
+            {...register("description", { required: true })}
+          />
+          <button type="submit">Save</button>
+        </form>
+      </Modal>
+
+      <Modal
+        title="Edit User"
+        open={isModalOpenEdit}
+        onCancel={() => setIsModalOpenEdit(false)}
+        footer={null}
+      >
+        <form onSubmit={handleSubmit(Submit)}>
+          <input
+            placeholder="Name"
+            {...register("name", { required: true })}
+          />
+          <input
+            placeholder="Description"
+            {...register("description", { required: true })}
+          />
+          <button type="submit">Save</button>
+        </form>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default App 
+export default App;
