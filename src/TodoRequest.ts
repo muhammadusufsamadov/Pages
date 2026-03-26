@@ -3,6 +3,7 @@ import axios from "axios";
 import type { IData } from "./todo";
 
 const url = "http://37.27.29.18:8001/api/to-dos";
+export const urlImage = "http://37.27.29.18:8001/images";
 const urlIsCompletely = "http://37.27.29.18:8001/completed"
 export let GetUser = createAsyncThunk("counter/GetUser", async () => {
   try {
@@ -48,7 +49,7 @@ export let DeleteImage = createAsyncThunk(
 
 export let AddImage = createAsyncThunk(
   "counter/AddImage",
-  async ({ id, image }, { dispatch }) => {
+  async ({ id, image }:any, { dispatch }) => {
     try {
       await axios.post(`${url}/${id}/images`, image)
       dispatch(GetUser())
@@ -58,7 +59,7 @@ export let AddImage = createAsyncThunk(
   },
 );
 
-export let EditUser = createAsyncThunk("counter/EditUser", async({id,NewUser}, {dispatch}) => {
+export let EditUser = createAsyncThunk("counter/EditUser", async({id,NewUser}:any, {dispatch}) => {
 
   try {
     await axios.put(`${url}?id=${id}`, NewUser)
@@ -67,7 +68,7 @@ export let EditUser = createAsyncThunk("counter/EditUser", async({id,NewUser}, {
     console.error(error);
   }
 } )
-export let changeStatus = createAsyncThunk("counter/changeStatus", async({id}, {dispatch}) => {
+export let changeStatus = createAsyncThunk("counter/changeStatus", async({id}:any, {dispatch}) => {
   try {
     await axios.put(`${urlIsCompletely}?id=${id}`)
     dispatch(GetUser())
