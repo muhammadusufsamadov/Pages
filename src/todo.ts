@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { GetUser } from './TodoRequest'
+import { GetUser, InfoUser } from './TodoRequest'
 interface IImage{
     id:number,
     imageName:string
@@ -12,11 +12,13 @@ export interface IData{
     isCompleted:boolean
 }
 export interface CounterState {
-  data: IData[]
+  data: IData[],
+  Info: null
 }
 
 const initialState: CounterState = {
   data: [],
+  Info:null
 }
 
 
@@ -30,6 +32,9 @@ export const counterSlice = createSlice({
     })
     builder.addCase(GetUser.fulfilled, (state, action) => {
        state.data = action.payload
+    })
+    builder.addCase(InfoUser.fulfilled, (state, action) => {
+       state.Info = action.payload
     })
   }
 })

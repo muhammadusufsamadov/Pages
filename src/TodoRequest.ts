@@ -1,11 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import type { IData } from "./todo";
 
 const url = "http://37.27.29.18:8001/api/to-dos";
 export const urlImage = "http://37.27.29.18:8001/images";
 const urlIsCompletely = "http://37.27.29.18:8001/completed"
-export let GetUser = createAsyncThunk("counter/GetUser", async () => {
+export let GetUser: any = createAsyncThunk("counter/GetUser", async () => {
   try {
     let { data } = await axios.get(url);
     return data.data;
@@ -13,9 +12,17 @@ export let GetUser = createAsyncThunk("counter/GetUser", async () => {
     console.error(error);
   }
 });
-export let AddUser = createAsyncThunk(
+export let InfoUser: any = createAsyncThunk("counter/InfoUser", async (id:number) => {
+  try {
+    let { data } = await axios.get(`${url}/${id}`);
+    return data.data;
+  } catch (error) {
+    console.error(error);
+  }
+});
+export let AddUser: any = createAsyncThunk(
   "counter/AddUser",
-  async (newUser: IData, { dispatch }) => {
+  async (newUser: any, { dispatch }) => {
     try {
       await axios.post(url, newUser);
       dispatch(GetUser());
@@ -24,7 +31,7 @@ export let AddUser = createAsyncThunk(
     }
   },
 );
-export let DeleteUser = createAsyncThunk(
+export let DeleteUser: any = createAsyncThunk(
   "counter/DeleteUser",
   async (id: number, { dispatch }) => {
     try {
@@ -35,7 +42,7 @@ export let DeleteUser = createAsyncThunk(
     }
   },
 );
-export let DeleteImage = createAsyncThunk(
+export let DeleteImage: any = createAsyncThunk(
   "counter/DeleteImage",
   async (id: number, { dispatch }) => {
     try {
@@ -47,11 +54,11 @@ export let DeleteImage = createAsyncThunk(
   },
 );
 
-export let AddImage = createAsyncThunk(
+export let AddImage: any = createAsyncThunk(
   "counter/AddImage",
-  async ({ id, image }:any, { dispatch }) => {
+  async ({ id, formData }:any, { dispatch }) => {
     try {
-      await axios.post(`${url}/${id}/images`, image)
+      await axios.post(`${url}/${id}/images`, formData)
       dispatch(GetUser())
     } catch (error) {
       console.error(error);
@@ -59,20 +66,20 @@ export let AddImage = createAsyncThunk(
   },
 );
 
-export let EditUser = createAsyncThunk("counter/EditUser", async({id,NewUser}:any, {dispatch}) => {
-
+export let EditUser: any = createAsyncThunk("counter/EditUser", async(NewUser:any, {dispatch}) => {
   try {
-    await axios.put(`${url}?id=${id}`, NewUser)
+    await axios.put(`${url}?id=${NewUser.id}`, NewUser)
     dispatch(GetUser())
   } catch (error) {
     console.error(error);
   }
 } )
-export let changeStatus = createAsyncThunk("counter/changeStatus", async({id}:any, {dispatch}) => {
+export let changeStatus: any = createAsyncThunk("counter/changeStatus", async({id}:any, {dispatch}) => {
   try {
     await axios.put(`${urlIsCompletely}?id=${id}`)
     dispatch(GetUser())
   } catch (error) {
     console.error(error);
   }
-} )
+})
+
